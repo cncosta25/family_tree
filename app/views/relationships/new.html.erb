@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @relationship.errors.any? %>
+  <% @relationship.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Relationship</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_relationship" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for relationship_type -->
+      <div class="form-group">
+        <label for="relationship_type" class="control-label">
+          Relationship type
+        </label>
+
+        <input type="text" id="relationship_type" name="relationship_type" placeholder="Relationship type" class="form-control" value="<%= @relationship.relationship_type %>">
+      </div>
+
+      <!-- Label and input for other_member_id -->
+      <div class="form-group">
+        <label for="other_member_id" class="control-label">
+          Other member
+        </label>
+
+        <input type="text" id="other_member_id" name="other_member_id" placeholder="Other member" class="form-control" value="<%= @relationship.other_member_id %>">
+      </div>
+
+      <!-- Label and input for member_id -->
+      <div class="form-group">
+        <label for="member_id" class="control-label">
+          Member
+        </label>
+
+        <input type="text" id="member_id" name="member_id" placeholder="Member" class="form-control" value="<%= @relationship.member_id %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Relationship
+      </button>
+      or
+      <a href="/relationships">Cancel</a>
+    </form>
+  </div>
+</div>

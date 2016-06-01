@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h3>Member #<%= @member.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
+      <dt>Surname</dt>
+      <dd><%= @member.surname %></dd>
+
+      <dt>Name</dt>
+      <dd><%= @member.name %></dd>
+
+      <dt>Notes</dt>
+      <dd><%= @member.notes %></dd>
+
+      <dt>Family</dt>
+      <dd><%= @member.family_id %></dd>
+
+      <dt>Image</dt>
+      <dd><%= @member.image %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/members" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/members/<%= @member.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_member/<%= @member.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>

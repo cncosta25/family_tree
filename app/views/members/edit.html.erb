@@ -1,0 +1,73 @@
+<!-- Validation failure messages -->
+<% if @member.errors.any? %>
+  <% @member.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Member #<%= @member.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_member/<%= @member.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for surname -->
+      <div class="form-group">
+        <label for="surname" class="control-label">
+          Surname
+        </label>
+
+        <input type="text" id="surname" name="surname" placeholder="Surname" class="form-control" value="<%= @member.surname %>">
+      </div>
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @member.name %>">
+      </div>
+
+      <!-- Label and input for notes -->
+      <div class="form-group">
+        <label for="notes" class="control-label">
+          Notes
+        </label>
+
+        <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"><%= @member.notes %></textarea>
+      </div>
+
+      <!-- Label and input for family_id -->
+      <div class="form-group">
+        <label for="family_id" class="control-label">
+          Family
+        </label>
+
+        <input type="text" id="family_id" name="family_id" placeholder="Family" class="form-control" value="<%= @member.family_id %>">
+      </div>
+
+      <!-- Label and input for image -->
+      <div class="form-group">
+        <label for="image" class="control-label">
+          Image
+        </label>
+
+        <input type="text" id="image" name="image" placeholder="Image" class="form-control" value="<%= @member.image %>">
+      </div>
+
+      <button class="btn btn-warning">
+        Update Member
+      </button>
+      or
+      <a href="/members/<%= @member.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
