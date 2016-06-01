@@ -4,8 +4,10 @@ source 'https://rubygems.org'
 
 gem "starter_generators", :git => "http://github.com/raghubetina/starter_generators.git"
 
-# devise gem
+# fake gem
+gem "faker"
 
+# devise gem
 gem 'devise'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
