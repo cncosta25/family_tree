@@ -4,4 +4,8 @@ class Member < ActiveRecord::Base
   belongs_to :member , :class_name => "Family", :foreign_key => "member_id"
   has_many :relatives, :through => :relationships , :source => :member
 
+  validates :surname, :presence => true
+  validates :name, :presence => true
+  validates :family_id, :presence => true
+
 end

@@ -9,16 +9,28 @@
 usernames = ["cristina", "raghu"]
 
 usernames.each do |username|
-  user = User.create
-  user.username = username
+  user = User.new
   user.email = "#{username}@example.com"
   user.password = "12341234"
   user.save
+
+  2.times do
+    family = Family.new
+    family.user_id = user.id
+    family.name = Faker::Name.last_name
+    family.save
+
+    2.times do
+      member = Member.new
+      member.name = Faker::Name.first_name
+      member.surname = family.name
+      member.notes = Faker::Lorem.paragraph
+      member.image = Faker::Avatar.image
+      member.family_id = family.id
+      member.save
+    end
+
+  end
 end
 
 puts "There are now #{User.count} users in the database."
-
-2.times do
-  family = Family.new
-  family.family_id = family.id
-  family.name = Faker::Name.last
