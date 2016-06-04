@@ -23,7 +23,7 @@
         <td><%= member.name %></td>
         <td><%= member.notes %></td>
         <td><%= member.family_id %></td>
-        <td><%= member.image %></td>
+        <td><img src="<%= member.image %>" class="img-responsive img-circle"></td>
         <td>
           <a href="/members/<%= member.id %>" class="btn btn-primary">Show</a>
           <a href="/members/<%= member.id %>/edit" class="btn btn-warning">Edit</a>
