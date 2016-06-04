@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Family #<%= @family.id %></h3>
+  <h3>The <%= @family.name %>s</h3>
 </div>
 
 <div class="row">
@@ -22,26 +22,22 @@
       <div class="checkbox">
         <label for="is_member">
           <input type="checkbox" id="is_member" name="is_member" value="1" <%= "checked" if @family.is_member %>>
-          Is member
+          Are you a member of this family?
         </label>
       </div>
 
       <!-- Label and input for user_id -->
       <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
-
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @family.user_id %>">
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @family.user_id %>">
       </div>
 
       <!-- Label and input for name -->
       <div class="form-group">
         <label for="name" class="control-label">
-          Name
+          Family Name
         </label>
 
-        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @family.name %>">
+        <input type="text" id="name" name="name" placeholder="ex. Smith" class="form-control" value="<%= @family.name %>">
       </div>
 
       <button class="btn btn-warning">
