@@ -5,6 +5,7 @@ class FamiliesController < ApplicationController
 
   def show
     @family = Family.find(params[:id])
+    @relationship = Relationship.new
   end
 
   def new
@@ -18,7 +19,7 @@ class FamiliesController < ApplicationController
     @family.name = params[:name]
 
     if @family.save
-      redirect_to "/families", :notice => "Family created successfully."
+      redirect_to "/show/#{@family.id}", :notice => "Family created successfully."
     else
       render 'new'
     end
@@ -36,7 +37,7 @@ class FamiliesController < ApplicationController
     @family.name = params[:name]
 
     if @family.save
-      redirect_to "/families", :notice => "Family updated successfully."
+      redirect_to "/families/#{@family.id}", :notice => "Family updated successfully."
     else
       render 'edit'
     end
