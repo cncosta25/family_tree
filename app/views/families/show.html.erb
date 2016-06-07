@@ -1,70 +1,73 @@
 <div class="page-header">
   <h3>The <%= @family.name %> Family</h3>
 
-    <div class="btn-group">
-      <a href="/families" class="btn btn-default btn-sm">
-        <i class="fa fa-chevron-left"></i>
-      </a>
-      <a href="/families/<%= @family.id %>/edit" class="btn btn-default btn-sm">
-        <i class="fa fa-edit fa-fw"></i>
-      </a>
-      <a href="/delete_family/<%= @family.id %>" class="btn btn-default btn-sm" rel="nofollow">
-        <i class="fa fa-trash-o fa-fw"></i>
-      </a>
+  <div class="btn-group">
+    <a href="/families" class="btn btn-default btn-sm">
+      <i class="fa fa-chevron-left"></i>
+    </a>
+    <a href="/families/<%= @family.id %>/edit" class="btn btn-default btn-sm">
+      <i class="fa fa-edit fa-fw"></i>
+    </a>
+    <a href="/delete_family/<%= @family.id %>" class="btn btn-default btn-sm" rel="nofollow">
+      <i class="fa fa-trash-o fa-fw"></i>
+    </a>
 
-    </div>
   </div>
+</div>
 
 <div class="row row-horizon">
-
-
-
   <% @family.members.each do |member| %>
 
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
 
-      <p> <%= member.name %> <%= member.surname %> </p>
-    </h4>
+        <p> <%= member.name %> <%= member.surname %> </p>
+      </h4>
 
-    <form action="/create_relationship" method="post">
-      <!-- Hidden input for authenticity token to protect from forgery -->
-      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+      <form action="/create_relationship" method="post">
+        <!-- Hidden input for authenticity token to protect from forgery -->
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for relationship_type -->
-      <div class="form-group">
-        <label for="relationship_type" class="control-label">
-          Relationship type
-        </label>
+        <!-- Label and input for relationship_type -->
+        <div class="form-group">
+          <label for="relationship_type" class="control-label">
+            Relationship
+          </label>
 
-        <input type="text" id="relationship_type" name="relationship_type" placeholder="Relationship type" class="form-control" value="<%= @relationship.relationship_type %>">
-      </div>
+          <input type="text" id="relationship_type" name="relationship_type" placeholder="Relationship type" class="form-control" value="<%= @relationship.relationship_type %>">
+        </div>
 
-      <!-- Label and input for other_member_id -->
-      <div class="form-group">
-        <label for="other_member_id" class="control-label">
-          Other member
-        </label>
+        <!-- Label and input for other_member_id -->
+        <div class="form-group">
+          <label for="other_member_id" class="control-label">
+            Family Member
+          </label>
 
-        <input type="text" id="other_member_id" name="other_member_id" placeholder="Other member" class="form-control" value="<%= @relationship.other_member_id %>">
-      </div>
+          <%= select_tag(:other_member_id, options_from_collection_for_select(Member.order("name ASC"), :id, :name, @members.id), :class => "form-control") %>
 
-      <!-- Label and input for member_id -->
-      <div class="form-group">
+          <input type="text" id="other_member_id" name="other_member_id" placeholder="Family member" class="form-control" value="<%= @relationship.other_member_id %>">
 
-        <input type="hidden" id="member_id" name="member_id" placeholder="Member" class="form-control" value="<%= member.id %>">
-      </div>
+          <p class="help-block">
+            <a href="/members/new">or add a new family member</a>
+          </p>
+        </div>
 
-      <button class="btn btn-success">
-        Create Relationship
-      </button>
-      or
-      <a href="/relationships">Cancel</a>
-    </form>
+        <!-- Label and input for member_id -->
+        <div class="form-group">
 
+          <input type="hidden" id="member_id" name="member_id" placeholder="Member" class="form-control" value="<%= member.id %>">
+        </div>
+
+        <button class="btn btn-success">
+          Create Relationship
+        </button>
+        or
+        <a href="/relationships">Cancel</a>
+      </form>
+
+    </div>
   </div>
-</div>
 
   <% end %>
 
@@ -111,6 +114,6 @@
 
   </div>
 
-        <% end %>
+  <% end %>
 
 </div> <!-- row -->
