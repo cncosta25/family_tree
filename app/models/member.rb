@@ -1,6 +1,6 @@
 class Member < ActiveRecord::Base
 
-  has_many :relationships , :class_name => "Relationship", :foreign_key => "member_id"
+  has_many :relationships , :class_name => "Relationship", :foreign_key => "member_id", :dependent => :destroy
   belongs_to :family
   has_many :relatives, :through => :relationships , :source => :member
 

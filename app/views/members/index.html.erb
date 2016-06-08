@@ -22,8 +22,8 @@
         <td><%= member.surname %></td>
         <td><%= member.name %></td>
         <td><%= member.notes %></td>
-        <td><%= member.family_id %></td>
-        <td><img src="<%= member.image %>" class="img-responsive img-circle"></td>
+        <td><%= member.family.name %></td>
+        <td><img src="<%= member.image %>" class=" img-thumbnail" width="300"></td>
         <td>
           <a href="/members/<%= member.id %>" class="btn btn-primary">Show</a>
           <a href="/members/<%= member.id %>/edit" class="btn btn-warning">Edit</a>

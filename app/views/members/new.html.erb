@@ -51,7 +51,8 @@
           Family
         </label>
 
-        <input type="text" id="family_id" name="family_id" placeholder="Family" class="form-control" value="<%= @member.family_id %>">
+        <%= select_tag(:family_id, options_from_collection_for_select(Family.order("name ASC"), :id, :name, @member.family_id), :class => "form-control") %>
+
       </div>
 
       <!-- Label and input for image -->

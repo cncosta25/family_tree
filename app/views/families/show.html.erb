@@ -15,15 +15,28 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-3">
+    <a href="/members/new" class="btn btn-default btn-block">
+      <i class="fa fa-plus"></i>
+    </a>
+
+    <hr>
+  </div>
+</div>
+
+
 <div class="row row-horizon">
-    <div class="col-md-3">
-  <% @family.members.each do |member| %>
+  <div class="col-md-3">
+    <% @family.members.each do |member| %>
 
     <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="panel-title">
 
           <p> <%= member.name %> <%= member.surname %> </p>
+          <p><img src="<%= member.image %>" width="100"></p>
+
         </h4>
 
         <form action="/create_relationship" method="post">
@@ -36,7 +49,7 @@
               Relationship
             </label>
 
-            <%= select_tag(:relationship_type, options_for_select([ ['Brother', 'bro'], ['Sister', 'sis'] ]), :class => "form-control") %>
+            <%= select_tag(:relationship_type, options_for_select([ ['Brother', 'bro'], ['Sister', 'sis'], ['Mother', 'mom'], ['Father', 'dad'], ['Child', 'kid'], ['Partner', 'partner'] ]), :class => "form-control") %>
 
             <!-- Label and input for other_member_id -->
             <div class="form-group">
@@ -46,10 +59,9 @@
 
               <%= select_tag(:other_member_id, options_from_collection_for_select(@members.order("name ASC"), :id, :name), :class => "form-control") %>
 
-              <p class="help-block">
-                <a href="/members/new">or add a new family member</a>
-              </p>
             </div>
+
+            <p></p>
 
             <!-- Label and input for member_id -->
             <div class="form-group">
@@ -102,6 +114,15 @@
             <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"></textarea>
           </div>
 
+      <!-- Label and input for image -->
+          <div class="form-group">
+            <label for="image" class="control-label">
+              Image
+            </label>
+
+            <input type="text" id="image" name="image" placeholder="Image" class="form-control">
+          </div>
+
           <!-- Hidden input for family_id -->
           <input type="hidden" name="family_id" value="<%= @family.id %>">
 
@@ -111,8 +132,8 @@
         </form>
 
       </div>
-  </div>
-      <% end %>
     </div>
+    <% end %>
+  </div>
 
-  </div> <!-- row -->
+</div> <!-- row -->
