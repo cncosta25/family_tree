@@ -20,7 +20,7 @@ class FamiliesController < ApplicationController
     @family.name = params[:name]
 
     if @family.save
-      redirect_to "/show/#{@family.id}", :notice => "Family created successfully."
+      redirect_to "/families", :notice => "Family created successfully."
     else
       render 'new'
     end
