@@ -4,11 +4,13 @@ class RelationshipsController < ApplicationController
   end
 
   def show
+    @relationships = Relationship.all
     @relationship = Relationship.find(params[:id])
   end
 
   def new
     @relationship = Relationship.new
+    @members = Member.all
   end
 
   def create
@@ -18,7 +20,7 @@ class RelationshipsController < ApplicationController
     @relationship.member_id = params[:member_id]
 
     if @relationship.save
-      redirect_to "/relationships", :notice => "Relationship created successfully."
+      redirect_to "/families/", :notice => "Relationship created successfully."
     else
       render 'new'
     end

@@ -17,8 +17,8 @@
 
 <div class="row">
   <div class="col-md-3">
-    <a href="/members/new" class="btn btn-default btn-block">
-      <i class="fa fa-plus"></i>
+    <a href="/members/new" class="btn btn-success btn-block">
+      Create New Family Member
     </a>
 
     <hr>
@@ -26,9 +26,10 @@
 </div>
 
 
-<div class="row row-horizon">
+<div class="row">
   <div class="col-md-3">
-    <% @family.members.each do |member| %>
+
+  <% @family.members.each do |member| %>
 
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -38,6 +39,16 @@
           <p><img src="<%= member.image %>" width="100"></p>
 
         </h4>
+
+      <% if member.relationships.any? %>
+
+        <% member.relationships.each do |relation| %>
+
+        <p> <%= relation.relationship_type %> <%= Member.find(relation.other_member_id).name %> </p>
+
+        <% end %>
+
+        <% else %>
 
         <form action="/create_relationship" method="post">
           <!-- Hidden input for authenticity token to protect from forgery -->
@@ -57,7 +68,7 @@
                 Family Member
               </label>
 
-              <%= select_tag(:other_member_id, options_from_collection_for_select(@members.order("name ASC"), :id, :name), :class => "form-control") %>
+              <%= select_tag(:other_member_id, options_from_collection_for_select(@members.where.not(:id => member.id).order("name ASC"), :id, :name), :class => "form-control") %>
 
             </div>
 
@@ -76,64 +87,19 @@
             <a href="/relationships">Cancel</a>
           </form>
 
-        </div>
-      </div>
+          <% end %>
 
-      <% end %>
 
-      <% if current_user.id == @family.user_id %>
-      <div class="panel-footer">
-        <form action="/create_member" method="post">
-
-          <!-- Hidden input for authenticity token to protect from forgery -->
-          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-
-          <!-- Label and input for name -->
-          <div class="form-group">
-            <label for="name" class="control-label">
-              Name
-            </label>
-
-            <input type="text" id="name" name="name" placeholder="Name" class="form-control">
-          </div>
-
-          <div class="form-group">
-            <label for="surname" class="control-label">
-              Surname
-            </label>
-
-            <input type="text" id="surname" name="surname" placeholder="Surname" class="form-control">
-          </div>
-
-          <!-- Label and input for description -->
-          <div class="form-group">
-            <label for="notes" class="control-label">
-              Notes
-            </label>
-
-            <textarea id="notes" name="notes" placeholder="Notes" class="form-control" rows="3"></textarea>
-          </div>
-
-      <!-- Label and input for image -->
-          <div class="form-group">
-            <label for="image" class="control-label">
-              Image
-            </label>
-
-            <input type="text" id="image" name="image" placeholder="Image" class="form-control">
-          </div>
-
-          <!-- Hidden input for family_id -->
-          <input type="hidden" name="family_id" value="<%= @family.id %>">
-
-          <button class="btn btn-success btn-block">
-            Create Member
-          </button>
-        </form>
 
       </div>
     </div>
+
+    <p></p>
+
     <% end %>
+
   </div>
+
+</div>
 
 </div> <!-- row -->

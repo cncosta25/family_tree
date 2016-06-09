@@ -7,6 +7,7 @@ class FamiliesController < ApplicationController
     @family = Family.find(params[:id])
     @relationship = Relationship.new
     @members = @family.members
+    @member = Member.new
   end
 
   def new

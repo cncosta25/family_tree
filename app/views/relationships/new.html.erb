@@ -21,10 +21,10 @@
       <!-- Label and input for relationship_type -->
       <div class="form-group">
         <label for="relationship_type" class="control-label">
-          Relationship type
+          Relationship
         </label>
 
-        <input type="text" id="relationship_type" name="relationship_type" placeholder="Relationship type" class="form-control" value="<%= @relationship.relationship_type %>">
+    <%= select_tag(:relationship_type, options_for_select([ ['Brother', 'bro'], ['Sister', 'sis'], ['Mother', 'mom'], ['Father', 'dad'], ['Child', 'kid'], ['Partner', 'partner'] ]), :class => "form-control") %>
       </div>
 
       <!-- Label and input for other_member_id -->
@@ -33,7 +33,7 @@
           Other member
         </label>
 
-        <input type="text" id="other_member_id" name="other_member_id" placeholder="Other member" class="form-control" value="<%= @relationship.other_member_id %>">
+      <%= select_tag(:other_member_id, options_from_collection_for_select(@members.order("name ASC"), :id, :name), :class => "form-control") %>
       </div>
 
       <!-- Label and input for member_id -->
