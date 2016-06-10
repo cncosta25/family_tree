@@ -43,7 +43,10 @@
 
         <% member.relationships.each do |relation| %>
 
-        <p> <%= relation.relationship_type %> <%= Member.find(relation.other_member_id).name %> </p>
+        <p> <%= relation.relationship_type %> of <%= Member.find(relation.other_member_id).name %> </p>
+
+        <p><a href="/relationships/<%=relation.id %>/edit">Edit</a> or
+        <a href="/delete_relationship/<%= relation.id %>">Delete</a> Relationship</p>
 
         <% end %>
 
@@ -96,5 +99,5 @@
     </div>
     <% end %>
 
-  </div>  
+  </div>
 </div> <!-- row -->

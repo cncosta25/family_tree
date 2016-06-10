@@ -49,6 +49,6 @@ class RelationshipsController < ApplicationController
 
     @relationship.destroy
 
-    redirect_to "/relationships", :notice => "Relationship deleted."
+    redirect_to "/families", :notice => "Relationship deleted."
   end
 end
