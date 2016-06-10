@@ -32,13 +32,14 @@ class RelationshipsController < ApplicationController
 
   def update
     @relationship = Relationship.find(params[:id])
+    @members = Member.all
 
     @relationship.relationship_type = params[:relationship_type]
     @relationship.other_member_id = params[:other_member_id]
     @relationship.member_id = params[:member_id]
 
     if @relationship.save
-      redirect_to "/relationships", :notice => "Relationship updated successfully."
+      redirect_to "/families", :notice => "Relationship updated successfully."
     else
       render 'edit'
     end

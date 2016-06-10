@@ -21,35 +21,32 @@
       <!-- Label and input for relationship_type -->
       <div class="form-group">
         <label for="relationship_type" class="control-label">
-          Relationship type
+          Relationship
         </label>
 
-        <input type="text" id="relationship_type" name="relationship_type" placeholder="Relationship type" class="form-control" value="<%= @relationship.relationship_type %>">
+        <%= select_tag(:relationship_type, options_for_select([ ['Brother', 'bro'], ['Sister', 'sis'], ['Mother', 'mom'], ['Father', 'dad'], ['Child', 'kid'], ['Partner', 'partner'] ]), :class => "form-control") %>
       </div>
 
       <!-- Label and input for other_member_id -->
       <div class="form-group">
         <label for="other_member_id" class="control-label">
-          Other member
+          Family Member
         </label>
 
-        <input type="text" id="other_member_id" name="other_member_id" placeholder="Other member" class="form-control" value="<%= @relationship.other_member_id %>">
+        <%= select_tag(:other_member_id, options_from_collection_for_select(Member.order("name ASC"), :id, :name, @relationship.member_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for member_id -->
       <div class="form-group">
-        <label for="member_id" class="control-label">
-          Member
-        </label>
 
-        <input type="text" id="member_id" name="member_id" placeholder="Member" class="form-control" value="<%= @relationship.member_id %>">
+        <input type="hidden" id="member_id" name="member_id" placeholder="Member" class="form-control" value="<%= @relationship.member_id %>">
       </div>
 
       <button class="btn btn-warning">
         Update Relationship
       </button>
       or
-      <a href="/relationships/<%= @relationship.id %>">Cancel</a>
+      <a href="/families/">Cancel</a>
     </form>
   </div>
 </div>
